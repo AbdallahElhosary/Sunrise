@@ -1,0 +1,23 @@
+.bg-lightgreen{
+    background-color: lightgreen;
+}
+
+.text-darkgreen{
+    color: darkgreen;
+}
+
+.bg-lightcoral{
+    background-color:lightcoral;
+}
+
+.text-darkred{
+    color:darkred;
+}
+
+.text-upper{
+    text-transform: uppercase;
+}
+
+.text-lower{
+    text-transform: lowercase;
+}

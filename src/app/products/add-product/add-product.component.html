@@ -1,0 +1,26 @@
+<h1 class="alert alert-success text-center fs-1 m-3">Create New Product</h1>
+<form (ngSubmit)="onSubmit()" class="col-4 m-3">
+    <div>
+        <label>Name</label>
+        <input [(ngModel)]="this.product.name" name="name" class="form-control"/>
+    </div>
+    <div>
+        <label>Description</label>
+        <input [(ngModel)]="this.product.description" name="description" class="form-control"/>
+    </div>
+    <div>
+        <label>Price</label>
+        <input [(ngModel)]="this.product.price" name="price" class="form-control"/>
+    </div>
+    <div>
+        <label>Category</label>
+        <select [(ngModel)]="product.categoryId" name="categoryId" class="form-control">
+            <!-- <option *ngFor="let category of this.allCategories">{{category.name}}</option> -->
+            @for(category of this.allCategories; track category){
+                <option [value]="category._id">{{category.name}}</option>
+            }
+        </select>
+    </div>
+
+    <button type="submit" class="btn btn-success">Add</button>
+</form>

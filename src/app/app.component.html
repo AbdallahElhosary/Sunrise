@@ -1,0 +1,507 @@
+<nav class="navbar bg-primary navbar-expand sticky-top p-1">
+  <ul class="navbar-nav">
+    <a class="navbar-brand" routerLink="">Sunrise</a>
+    <li class="nav-item"><a class="nav-link" routerLink="about">About Us</a></li>
+    <li class="nav-item"><a class="nav-link" routerLink="contact">Contact Us</a></li>
+    <li class="nav-item"><a class="nav-link" routerLink="products">Products</a></li>
+  </ul>
+</nav>
+
+<router-outlet />
+
+
+
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<hr>
+<!-- One-way Data Binding -->
+<!-- String Interpolation -->
+<h1 class="alert alert-info">{{company}}</h1>
+
+<!-- Property Binding -->
+<input [value]="company" />
+
+<!-- String Interpolation -->
+<input value={{company}} />
+
+<!-- Property Binding -->
+<img [src]="img1Url" alt="image 1" style="width: 250px;">
+
+<!-- String Interpolation -->
+<img src={{img2Url}} alt="image 2" style="width: 250px;">
+<hr>
+
+<!-- Event Binding -->
+<button (click)="greetVisitor()" class="btn btn-primary">Greet Our Visitor</button>
+<p (mouseover)="onParagraphMouseOver()" class="bg-info" style="width: 300px;">Lorem ipsum dolor sit amet, consectetur
+  adipisicing elit.
+  Odio consectetur
+  laudantium corporis enim
+  quidem ullam! Aliquid qui quae dolorem distinctio mollitia architecto rerum magni inventore cupiditate, culpa expedita
+  reprehenderit necessitatibus!</p>
+<hr>
+
+<!-- Class Binding -->
+<div style="width: 300px;height: 150px;" class="fs-1 text-center" [class.bg-danger]="isDangerous"
+  [class.bg-success]="!isDangerous">
+  {{isDangerous ? 'Dangerous' : 'Safe'}}
+</div>
+
+<button (click)="ToggleDangerous()" class="btn btn-outline-danger m-1">
+  Toggle Dangerous
+</button>
+<hr>
+<!-- Style Binding -->
+<div style="width: 300px;height: 150px; background-color: yellow;" class="fs-1 text-center"
+  [style.color]="isAccepted ? 'green':'red'">
+  {{isAccepted ? 'Accepted' : 'Refused'}}
+</div>
+<button (click)="ToggleAccepted()" class="btn btn-outline-primary m-1">
+  Toggle Accepted
+</button>
+<hr>
+<h3>Template Variables</h3>
+<div>
+  <label>Input 1 </label>
+  <input #input1 (focus)="onInput1Focus()" (blur)="onInput1Blur()" />
+</div>
+<div>
+  <label>Input 2 </label>
+  <input #input2 (blur)="printOnConsole(input2.value)" />
+</div>
+
+<hr>
+<h3>Event Object</h3>
+<div>
+  <label>Input 3</label>
+  <input #input3 id="thirdInput" (blur)="printEventObject($event)" />
+</div>
+<div>
+  <label>Input 4</label>
+  <input #input4 id="fourthInput" (blur)="printEventTarget($event)" />
+</div>
+<button id="btnFirstTarget" (click)="printEventTarget($event)" class="btn btn-warning m-1">
+  First Target
+</button>
+<button id="btnSecondTarget" (click)="printEventTarget($event)" class="btn btn-info m-1">
+  Second Target
+</button>
+
+<div>
+  <label>Input 5</label>
+  <input #input5 id="fifthInput" (blur)="printEventTargetValue($event)" />
+</div>
+
+<hr>
+<h1>keydown (fired before the character is added)</h1>
+<input (keydown)="alertEventTargetValue($event)" />
+<h1>keyup (fired after the character is added)</h1>
+<input (keyup)="alertEventTargetValue($event)" />
+<h3>{{address}}</h3>
+<input [value]="address" (keyup)="updateAddress($event)" />
+
+<hr>
+<!-- Two-way Data Binding -->
+<h1 class="alert alert-primary">Two-way Binding</h1>
+<!-- String -->
+<h2 class="alert alert-info text-center">String</h2>
+<h3 class="text-success">{{address}}</h3>
+<input [(ngModel)]="address" />
+<br />
+
+<!-- Numeric -->
+<h2 class="alert alert-secondary text-center">Numeric</h2>
+<h3 class="text-warning">{{appraisal}}</h3>
+<input type="number" [(ngModel)]="appraisal" />
+<input type="range" min="0" max="100" step="1" [(ngModel)]="appraisal" />
+
+<!-- Directives -->
+<h1 class="alert alert-success text-center">Directives</h1>
+<h2>(1) Structural Directives</h2>
+<h3>*ngIf</h3>
+<p class="bg-dark text-warning text-center fs-1 fw-bolder" *ngIf="score >= 95">
+  Excellence Gift: 5000 EGP
+</p>
+
+<h3>&#64;if</h3>
+@if(score >= 95){
+<p class="bg-dark text-warning text-center fs-1 fw-bolder">
+  ===Excellence Gift: 5000 EGP===
+</p>
+}
+
+
+<!-- *ngIf twice -->
+<h1 class="alert alert-primary text-center">*ngIf twice</h1>
+<p class="bg-success-subtle text-success text-center fs-1 fw-bolder border border-5 border-success m-5"
+  *ngIf="score >= 50">
+  Passed
+</p>
+
+<p class="bg-danger-subtle text-danger text-center fs-1 fw-bolder border border-5 border-danger m-5" *ngIf="score < 50">
+  Failed
+</p>
+
+<!-- ngIf...then...else & ng-template -->
+
+<h1 class="alert alert-primary text-center">ngIf...then...else & ng-template</h1>
+
+<div *ngIf="score>=50; then passedNgTemp; else failedNgTemp"></div>
+
+<ng-template #passedNgTemp>
+  <p class="bg-success-subtle text-success text-center fs-1 fw-bolder border border-5 border-success m-5">
+    (((Passed)))
+  </p>
+</ng-template>
+
+<ng-template #failedNgTemp>
+  <p class="bg-danger-subtle text-danger text-center fs-1 fw-bolder border border-5 border-danger m-5">
+    (((Failed)))
+  </p>
+</ng-template>
+
+<hr>
+<h1 class="alert alert-primary text-center">ngIf...else & ng-template</h1>
+
+<p class="bg-success-subtle text-success text-center fs-1 fw-bolder border border-5 border-success m-5"
+  *ngIf="score >= 50; else failedNgTemp2">
+  [[[Passed]]]
+</p>
+
+<ng-template #failedNgTemp2>
+  <p class="bg-danger-subtle text-danger text-center fs-1 fw-bolder border border-5 border-danger m-5">
+    [[[Failed]]]
+  </p>
+</ng-template>
+
+
+
+
+
+<hr>
+<!-- @if...@else -->
+<h1 class="alert alert-primary text-center">&#64;if...&#64;else</h1>
+
+@if(score >= 50){
+<p class="bg-success-subtle text-success text-center fs-1 fw-bolder border border-5 border-success m-5">
+  ===Passed===
+</p>
+}
+@else {
+<p class="bg-danger-subtle text-danger text-center fs-1 fw-bolder border border-5 border-danger m-5">
+  ===Failed===
+</p>
+}
+
+
+
+
+
+<hr>
+<hr>
+<hr>
+
+<h2>Total Grade: </h2>
+@if(score >= 90){
+<h2>Perfect</h2>
+}
+@else if(score >= 80){
+<h2>Very Good</h2>
+}
+@else if(score >= 65){
+<h2>Good</h2>
+}
+@else if(score >= 50){
+<h2>Passed</h2>
+}
+@else if(score >= 40){
+<h2>Poor</h2>
+}
+@else {
+<h2>Very Poor</h2>
+}
+
+<hr>
+<h1>Current Date and Time: {{currentDateTime}}</h1>
+<h2>Current Hour: {{currentHour}}</h2>
+<p class="bg-success-subtle text-success text-center fs-1 fw-bolder m-5 border border-success border-5">
+  @if(currentHour >= 4 && currentHour < 12){ <span>Good morning</span>
+    }
+    @else if(currentHour >= 12 && currentHour < 20){ <span>Good afternoon</span>
+      }
+      @else {
+      <span>Good evening</span>
+      }
+</p>
+
+<hr>
+<!--ngFor-->
+<!-- <h3>*ngFor</h3>
+<ul class="list-group text-center col-3">
+  <li class="list-group-item active fw-bolder">Branches</li>
+  <li *ngFor="let branch of branches" class="list-group-item list-group-item-action">
+    {{branch}}
+  </li>
+</ul> -->
+
+<!--@for-->
+<!-- <h3>&#64;for</h3>
+<ul class="list-group text-center col-3">
+  <li class="list-group-item active fw-bolder">Branches</li>
+  @for (branch of branches; track branch) {
+  <li class="list-group-item list-group-item-action">
+    {{branch}}
+  </li>
+  }
+</ul> -->
+
+<hr>
+<!--ngFor-->
+<h3>*ngFor</h3>
+<ul class="list-group text-center col-3">
+  <li class="list-group-item active fw-bolder">Branches</li>
+  <div *ngIf="branches.length > 0">
+    <li *ngFor="let branch of branches" class="list-group-item list-group-item-action">
+      {{branch}}
+    </li>
+  </div>
+  <div *ngIf="branches.length === 0">
+    <li class="list-group-item list-group-item-action text-danger fw-bold">
+      There is no data to display
+    </li>
+  </div>
+</ul>
+
+<!--@for-->
+<h3>&#64;for</h3>
+<ul class="list-group text-center col-3">
+  <li class="list-group-item active fw-bolder">Branches</li>
+  @for (branch of branches; track branch) {
+  <li class="list-group-item list-group-item-action">
+    {{branch}}
+  </li>
+  }
+  @empty {
+  <li class="list-group-item list-group-item-action text-danger fw-bold">
+    There is no data to display
+  </li>
+  }
+</ul>
+
+<hr>
+<h1>*ngFor</h1>
+<table class="table table-bordered table-hover text-center caption-top" *ngIf="products.length > 0">
+  <caption class="text-center fs-1 fw-bolder">
+    Products
+  </caption>
+  <thead class="table-dark">
+    <tr><th>Id</th><th>Name</th><th>Description</th><th>Price</th></tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let product of products">
+      <!-- <td>{{product.id}}</td>
+      <td>{{product.name}}</td>
+      <td>{{product.description}}</td>
+      <td>{{product.price}}</td> -->
+    </tr>
+  </tbody>
+</table>
+
+<h1 class="alert alert-danger text-center" *ngIf="products.length === 0">
+  There is no product to display
+</h1>
+
+<h1>&#64;for</h1>
+@if (products.length > 0) {
+<table class="table table-bordered table-hover text-center caption-top">
+  <caption class="text-center fs-1 fw-bolder">
+    Products
+  </caption>
+  <thead class="table-dark">
+    <tr><th>Id</th><th>Name</th><th>Description</th><th>Price</th></tr>
+  </thead>
+  <tbody>
+    @for (product of products; track product) {
+    <tr>
+      <!-- <td>{{product.id}}</td>
+      <td>{{product.name}}</td>
+      <td>{{product.description}}</td>
+      <td>{{product.price}}</td> -->
+    </tr>
+  }
+  </tbody>
+</table>
+}
+@else {
+  <h1 class="alert alert-danger text-center">
+    There is no product to display
+  </h1>
+}
+
+<!-- Structural Directives -->
+<h1 class="alert alert-primary text-center">
+  *ngSwitchCase
+</h1>
+<p [ngSwitch]="customerCountry" 
+   class="text-center fs-1 fw-bolder text-success">
+  Discount: 
+  <span *ngSwitchCase="'Egypt'">30%</span>
+  <span *ngSwitchCase="'Kuwait'">20%</span>
+  <span *ngSwitchDefault>10%</span>
+</p>
+
+<h1 class="alert alert-primary text-center">
+  &#64;switch
+</h1>
+<p class="text-center fs-1 fw-bolder text-success">
+  Discount: 
+  @switch (customerCountry) {
+    @case('Egypt'){
+      <span>30%</span>
+    }
+    @case('Kuwait'){
+      <span>20%</span>
+    }
+    @default {
+      <span>10%</span>
+    }
+}
+</p>
+
+<h3>Style Binding</h3>
+<div style="width: 300px; height: 150px; text-align: center; font-size: 36px;"
+[style.backgroundColor]="isAccepted ? 'lightgreen' : 'lightcoral'"
+[style.color]="isAccepted ? 'darkgreen' : 'darkred'"
+[style.textTransform]="isAccepted ? 'uppercase' : 'lowercase'">
+  {{isAccepted ? 'Accepted' : 'Refused'}}
+</div>
+<button (click)="ToggleAccepted()">
+  Toggle Accepted (On/Off)
+</button>
+
+<!-- Attribute Directives -->
+<h3>ngStyle</h3>
+<div style="width: 300px; height: 150px; text-align: center; font-size: 36px;"
+[ngStyle]="{'backgroundColor':isAccepted ? 'lightgreen' : 'lightcoral',
+  'color':isAccepted ? 'darkgreen' : 'darkred',
+  'textTransform': isAccepted ? 'uppercase':'lowercase'}">
+  {{isAccepted ? 'Accepted' : 'Refused'}}
+</div>
+<button (click)="ToggleAccepted()">
+  Toggle Accepted (On/Off)
+</button>
+
+<!-- Class Binding -->
+ <h3>Class Binding</h3>
+ <div style="width: 300px; height: 150px; text-align: center; font-size: 36px;"
+      [class.bg-lightgreen] ="isAccepted"
+      [class.text-darkgreen]="isAccepted"
+      [class.text-upper]="isAccepted"
+      [class.bg-lightcoral]="!isAccepted"
+      [class.text-darkred]="!isAccepted"
+      [class.text-lower]="!isAccepted">
+  {{isAccepted ? 'Accepted' : 'Refused'}}
+ </div>
+ <button (click)="ToggleAccepted()">
+  Toggle Accepted (On/Off)
+</button>
+
+<!-- ngClass (Attribute Directive) -->
+<h3>ngClass (Attribute Directive)</h3>
+<div style="width: 300px; height: 150px; text-align: center; font-size: 36px;"
+[ngClass]="{
+  'bg-lightgreen':isAccepted,
+  'text-darkgreen':isAccepted,
+  'text-upper':isAccepted,
+  'bg-lightcoral':!isAccepted,
+  'text-darkred':!isAccepted,
+  'text-lower':!isAccepted}">
+  {{isAccepted ? 'Accepted' : 'Refused'}}
+ </div>
+ <button (click)="ToggleAccepted()">
+  Toggle Accepted (On/Off)
+</button>
+
+
+<h1 class="alert alert-danger text-center m-5" [hidden]="isLoggedIn == true">
+  Log in or Register
+</h1>
+
+<h1 class="alert alert-danger text-center m-5" [hidden]="isLoggedIn">
+  Log in or Register
+</h1>
+
+<h1 class="alert alert-secondary text-center m-5" [hidden]="isLoggedIn == false">
+  Sign Out
+</h1>
+
+<h1 class="alert alert-secondary text-center m-5" [hidden]="!isLoggedIn">
+  Sign Out
+</h1>
+
+<button class="btn btn-success m-1" [disabled]="isAdmin == false">
+  Add New Product
+</button>
+
+<button class="btn btn-success m-1" [disabled]="!isAdmin">
+  Add New Product
+</button>
+
+
+<h1 class="alert alert-success text-center">Pipes</h1>
+<h2>{{companyName}}</h2>
+<h2>{{companyName | uppercase}}</h2>
+<h2>{{companyName | lowercase}}</h2>
+<h2>{{companyName | titlecase}}</h2>
+<h2>{{numberOfTransactions}}</h2>
+<!-- number (DecimalPipe) -->
+<h2>{{numberOfTransactions | number}}</h2>
+<h2>{{evaluation}}</h2>
+<h2>{{evaluation | percent}}</h2>
+<h2>{{sales}}</h2>
+<h2>{{sales | currency}}</h2>
+<h2>{{sales | currency : 'EGP'}}</h2>
+<h2>{{sales | currency : 'USD'}}</h2>
+<h2>{{sales | currency : 'GBP'}}</h2>
+<h2>{{sales | currency : 'EUR'}}</h2>
+<h2>{{startDate}}</h2>
+<h2>{{startDate | date}}</h2>
+<h2>{{startDate | date : 'dd/MM/yyyy'}}</h2>
+<h2>{{startDate | date : 'dd-MM-yyyy'}}</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div id="testDiv" style="width: 200px;height: 200px;"></div>
+
+<nav class="navbar bg-primary navbar-expand fixed-bottom p-1 text-center">
+  <div style="margin: auto;">
+    <a href="https://www.facebook.com/sunrise" class="m-1">
+      <i class="bi bi-facebook text-white"></i>
+    </a>
+    <a href="https://www.x.com/sunrise" class="m-1">
+      <i class="bi bi-twitter-x text-white"></i>
+    </a>
+    <a href="https://www.linkedin.com/sunrise" class="m-1">
+      <i class="bi bi-linkedin text-white"></i>
+    </a>
+
+    <span class="text-white fs-6">&nbsp;&nbsp;&nbsp;&copy; 2024 Copyright:&nbsp;</span>
+    <a class="text-white fs-6" href="https://www.sunrise.com">sunrise.com</a>
+  </div>
+</nav>

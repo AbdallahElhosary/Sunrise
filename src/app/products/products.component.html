@@ -1,0 +1,34 @@
+<h1 class="alert alert-success text-center">Products</h1>
+
+<a routerLink="add" class="btn btn-success m-3">Create New</a>
+
+<div class="row m-3">
+<div class="input-group col-4">
+    <input [(ngModel)] = "this.searchText" name="searchText" class="form-control"/>
+    <button (click)="search()" class="btn btn-secondary"><i class="bi bi-search"></i></button>
+</div>
+
+<table class="table table-bordered table-hover caption-top text-center">
+<caption class="fs-1 text-center">Products</caption>
+<thead class="table-dark">
+    <tr><th>_Id</th><th>Name</th><th>Description</th><th>Price</th><th>CreatedDate</th><th></th></tr>
+</thead>
+<tbody>
+    @for(product of this.allProducts; track product){
+        <tr>
+            <td>{{product._id}}</td>
+            <td>{{product.name}}</td>
+            <td>{{product.description}}</td>
+            <td>{{product.price}}</td>
+            <td>{{product.createdDate}}</td>
+            <td class="btn-group">
+                <a routerLink="details/{{product._id}}" class="btn btn-primary" title="Details"><i class="bi bi-list-ul"></i></a>
+                <a routerLink="edit/{{product._id}}" class="btn btn-success" title="Edit"><i class="bi bi-pencil-square"></i></a>
+                <a routerLink="delete/{{product._id}}" class="btn btn-danger" title="Delete"><i class="bi bi-trash"></i></a>
+            </td>
+        </tr>
+    }
+</tbody>
+</table>
+</div>
+
